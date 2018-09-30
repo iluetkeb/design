@@ -23,4 +23,19 @@ published: false
 
 Original Author: {{ page.author }}
 
-## 
+## Use Cases
+
+We have two main use-cases in mind:
+ 
+ 1. Connecting a micro-controller-based control and sensor board to a more powerful compute device within one robot
+ 1. Communication between a robot and sensors in the environment  
+
+## Issues with using ROS2 as-is
+
+ROS2 has targeted embedded devices as well, so why can we not use that directly? There are a number of issues, most of which 
+relate to the use of DDS:
+
+ - DDS is a powerful, but also very complex middleware approach. Despite several attempts at shrinking implementations, 
+   the DDS part alone is usually too big for a micro-controller
+ - DDS also requires devices to be listening all the time, which we might not want to do for battery-operated devices
+ - The data traffic from DDS can easily overwhelm low-bandwidth links.
